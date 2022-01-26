@@ -1,3 +1,4 @@
+// declare interfaces and types in a different file for props and import them in the component for separation of concerns
 import { ITextBoxProps } from "./text-box.types";
 
 const TextBox = ({
