@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Button } from "./components/button/button";
+import { TextBox } from "./components/text-box/text-box";
+import { TextContent } from "./components/text-content/text-content";
+
+export type Color = "black" | "blue" | "red" | "green";
+const colors: Color[] = ['black', 'blue', 'red', 'green'];
 
 function App() {
+  const [inputText, setInputText] = useState<string>("");
+  const [style, setStyle] = useState<Color>("black");
+
+  const changeColor = (): void => { 
+    const randomElement: number = Math.floor(Math.random() * colors.length);
+    const selectedColor: Color = colors[randomElement];
+    setStyle(selectedColor);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TextBox
+        inputText={inputText}
+        setInputText={setInputText}
+        placeholder="Enter gali here"
+        type="text"
+      />
+      <Button changeColor={changeColor} buttonText="Press me" />
+      <TextContent style={style} text={inputText} />
     </div>
   );
 }
